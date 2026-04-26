@@ -1,0 +1,26 @@
+[
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {}
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "__placeholder__",
+    "named": false
+  },
+  {
+    "type": "block_comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "line_comment",
+    "named": true,
+    "extra": true
+  }
+]
