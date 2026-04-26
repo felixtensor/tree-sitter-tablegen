@@ -10,6 +10,10 @@
 export default grammar({
   name: "tablegen",
 
+  conflicts: $ => [
+    [$._value, $.body],
+  ],
+
   extras: $ => [
     /\s+/,
     $.line_comment,
@@ -114,6 +118,7 @@ export default grammar({
       optional(seq("<", optional($.argument_list), ">")),  // argument_list in Task 9
     ),
 
+    // Higher precedence than _base_value to resolve conflict when seeing '{'
     body: $ => choice(
       ";",
       seq("{", repeat($._body_item), "}"),
@@ -163,13 +168,98 @@ export default grammar({
       ";",
     ),
 
-    // Temporary stub for _value - will be expanded in Task 7
-    _value: $ => choice(
-      $.identifier,
+    // Task 7: Full value layer with suffix, paste, list/bits/dag literals
+    // _value is a simple value with optional suffixes, or a paste expression
+    _value: $ => prec.left(choice(
+      seq($._simple_value, repeat($._value_suffix)),
+      $.paste_expression,
+    )),
+
+    paste_expression: $ => prec.left(seq(
+      $._value,
+      "#",
+      optional($._value),
+    )),
+
+    _simple_value: $ => choice(
       $.integer_literal,
       $.string_literal,
       $.boolean_literal,
       $.unset_value,
+      $.bits_value,
+      $.list_value,
+      $.dag_value,
+      $.identifier,
+    ),
+
+    bits_value: $ => seq(
+      "{",
+      optional(seq($._value, repeat(seq(",", $._value)))),
+      "}",
+    ),
+
+    list_value: $ => seq(
+      "[",
+      optional(seq($._value, repeat(seq(",", $._value)))),
+      "]",
+      optional(seq("<", $.type, ">")),
+    ),
+
+    dag_value: $ => seq(
+      "(",
+      $._dag_simple_value,
+      repeat(seq(",", $.dag_arg)),
+      ")",
+    ),
+
+    // A simple value for dag contexts - avoids ambiguity with consecutive identifiers
+    // This is a restricted form of _value that doesn't include paste expressions
+    _dag_simple_value: $ => seq($._simple_value, repeat($._value_suffix)),
+
+    dag_arg: $ => choice(
+      seq($._value, optional(seq(":", $.variable_name))),
+      $.variable_name,
+    ),
+
+    variable_name: _ => token(seq("$", /[A-Za-z_][A-Za-z0-9_]*/)),
+
+    _value_suffix: $ => choice(
+      $.value_suffix_braces,
+      $.value_suffix_brackets,
+      $.value_suffix_dot,
+    ),
+
+    value_suffix_braces: $ => $.range_list,
+
+    value_suffix_brackets: $ => seq(
+      "[",
+      $.slice_element,
+      repeat(seq(",", $.slice_element)),
+      optional(","),
+      "]",
+    ),
+
+    value_suffix_dot: $ => seq(".", $.identifier),
+
+    range_list: $ => seq(
+      "{",
+      $.range_piece,
+      repeat(seq(",", $.range_piece)),
+      "}",
+    ),
+
+    range_piece: $ => choice(
+      $.integer_literal,
+      seq($.integer_literal, "...", $.integer_literal),
+      seq($.integer_literal, "-", $.integer_literal),
+      seq($.integer_literal, $.integer_literal),
+    ),
+
+    slice_element: $ => choice(
+      $._value,
+      seq($._value, "...", $._value),
+      seq($._value, "-", $._value),
+      seq($._value, $.integer_literal),
     ),
 
     template_parameters: $ => seq(
@@ -192,7 +282,5 @@ export default grammar({
       repeat(seq(",", $._value)),
     ),
 
-    // Forward declaration for rule defined in later task
-    range_list: $ => seq("[", $.integer_literal, "]"),
   },
 });
