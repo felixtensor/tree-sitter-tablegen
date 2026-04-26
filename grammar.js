@@ -18,6 +18,11 @@ export default grammar({
 
   word: $ => $.identifier,
 
+  externals: $ => [
+    $.code_chunk,
+    $._error_sentinel,
+  ],
+
   conflicts: $ => [
     [$.positional_arguments],
     [$.range_piece, $._simple_value],
@@ -293,8 +298,20 @@ export default grammar({
       $.anonymous_record,
       $.bang_operator_call,
       $.cond_operator_call,
+      prec.dynamic(1, $.code_literal),
       $.identifier,
     ),
+
+    code_literal: $ => seq(
+      token(seq("[", "{")),
+      repeat(choice(
+        $.code_chunk,
+        $.variable_substitution,
+      )),
+      token(seq("}", "]")),
+    ),
+
+    variable_substitution: $ => seq("$", $.identifier),
 
     anonymous_record: $ => seq(
       $.identifier,
