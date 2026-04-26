@@ -81,3 +81,19 @@ def D { string s = "a" # b # ; }
         (paste_expression
           (paste_expression (string_literal) (identifier))
           )))))
+
+==================
+Anonymous record as value
+==================
+
+def D { Foo x = MyClass<1, "y">; }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration (type (identifier)) (identifier)
+        (anonymous_record (identifier)
+          (argument_list (integer_literal) (string_literal)))))))

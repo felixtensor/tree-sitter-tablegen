@@ -183,7 +183,15 @@ export default grammar({
       $.bits_value,
       $.list_value,
       $.dag_value,
+      $.anonymous_record,
       $.identifier,
+    ),
+
+    anonymous_record: $ => seq(
+      $.identifier,
+      "<",
+      optional($.argument_list),
+      ">",
     ),
 
     bits_value: $ => seq(
