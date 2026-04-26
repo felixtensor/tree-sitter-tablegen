@@ -1163,6 +1163,10 @@
           "named": true
         },
         {
+          "type": "field_declaration",
+          "named": true
+        },
+        {
           "type": "foreach_statement",
           "named": true
         },
@@ -1180,6 +1184,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "let_assignment",
           "named": true
         },
         {
@@ -1302,6 +1310,10 @@
           "named": true
         },
         {
+          "type": "field_declaration",
+          "named": true
+        },
+        {
           "type": "foreach_statement",
           "named": true
         },
@@ -1319,6 +1331,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "let_assignment",
           "named": true
         },
         {
@@ -1591,6 +1607,10 @@
           "named": true
         },
         {
+          "type": "field_declaration",
+          "named": true
+        },
+        {
           "type": "foreach_statement",
           "named": true
         },
@@ -1600,6 +1620,10 @@
         },
         {
           "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "let_assignment",
           "named": true
         },
         {
