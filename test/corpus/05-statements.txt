@@ -1,0 +1,73 @@
+==================
+defm with parent list
+==================
+
+defm Name : Foo<1>, Bar;
+
+---
+
+(source_file
+  (defm_definition
+    (identifier)
+    (parent_class_list
+      (parent_class
+        (identifier)
+        (argument_list
+          (positional_arguments
+            (integer_literal))))
+      (parent_class
+        (identifier)))))
+
+==================
+defm without name
+==================
+
+defm : Foo;
+
+---
+
+(source_file
+  (defm_definition
+    (parent_class_list
+      (parent_class
+        (identifier)))))
+
+==================
+defset with body
+==================
+
+defset list<C> Group = { def A; def B; }
+
+---
+
+(source_file
+  (defset_definition
+    (type
+      (identifier))
+    (identifier)
+    (def_definition
+      (identifier)
+      (body))
+    (def_definition
+      (identifier)
+      (body))))
+
+==================
+deftype defvar dump
+==================
+
+deftype MyT = list<int>;
+defvar gx = 7;
+dump "hello";
+
+---
+
+(source_file
+  (deftype_definition
+    (identifier)
+    (type))
+  (defvar_statement
+    (identifier)
+    (integer_literal))
+  (dump_statement
+    (string_literal)))
