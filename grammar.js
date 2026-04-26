@@ -10,8 +10,26 @@
 export default grammar({
   name: "tablegen",
 
+  extras: $ => [
+    /\s+/,
+    $.line_comment,
+    $.block_comment,
+  ],
+
+  word: $ => $.identifier,
+
   rules: {
-    // TODO: add the actual grammar rules
-    source_file: $ => "hello"
-  }
+    source_file: $ => repeat($._top_level_item),
+
+    _top_level_item: $ => choice(
+      // populated incrementally by later tasks
+      $._placeholder_top_item,
+    ),
+
+    _placeholder_top_item: $ => seq("__placeholder__", ";"),
+
+    line_comment: _ => token(seq("//", /[^\n]*/)),
+    block_comment: _ => token(seq("/*", /([^*]|\*[^/])*/, "*/")),
+    identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
+  },
 });
