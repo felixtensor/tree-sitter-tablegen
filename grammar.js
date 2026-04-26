@@ -154,9 +154,15 @@ export default grammar({
       choice($.range_list, $.range_piece, $._value),
       "in",
       choice(
-        seq("{", repeat($._top_level_item), "}"),
-        $._top_level_item,
+        seq("{", repeat($._foreach_body_item), "}"),
+        $._foreach_body_item,
       ),
+    ),
+
+    _foreach_body_item: $ => choice(
+      $._top_level_item,
+      $.field_declaration,
+      $.let_assignment,
     ),
 
     if_statement: $ => prec.right(seq(
@@ -168,8 +174,8 @@ export default grammar({
     )),
 
     _if_body: $ => choice(
-      seq("{", repeat($._top_level_item), "}"),
-      $._top_level_item,
+      seq("{", repeat($._foreach_body_item), "}"),
+      $._foreach_body_item,
     ),
 
     let_statement: $ => seq(
@@ -178,8 +184,8 @@ export default grammar({
       repeat(seq(",", $.let_item)),
       "in",
       choice(
-        seq("{", repeat($._top_level_item), "}"),
-        $._top_level_item,
+        seq("{", repeat($._foreach_body_item), "}"),
+        $._foreach_body_item,
       ),
     ),
 

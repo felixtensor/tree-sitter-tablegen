@@ -1,0 +1,95 @@
+==================
+Anonymous def
+==================
+
+def : Foo<1>;
+
+---
+
+(source_file
+  (def_definition
+    (parent_class_list
+      (parent_class
+        (identifier)
+        (argument_list
+          (positional_arguments
+            (integer_literal)))))
+    (body)))
+
+==================
+Empty multiclass
+==================
+
+multiclass MC { }
+
+---
+
+(source_file
+  (multiclass_definition
+    (identifier)))
+
+==================
+Defm chain (defm without name, only inheritance)
+==================
+
+defm : Foo, Bar<1>;
+
+---
+
+(source_file
+  (defm_definition
+    (parent_class_list
+      (parent_class
+        (identifier))
+      (parent_class
+        (identifier)
+        (argument_list
+          (positional_arguments
+            (integer_literal)))))))
+
+==================
+Foreach inside class body
+==================
+
+class C {
+  foreach i = 0...3 in {
+    int x = i;
+  }
+}
+
+---
+
+(source_file
+  (class_definition
+    (identifier)
+    (body
+      (foreach_statement
+        (identifier)
+        (range_piece
+          (integer_literal)
+          (integer_literal))
+        (field_declaration
+          (type)
+          (identifier)
+          (identifier))))))
+
+==================
+Field with code literal value
+==================
+
+class C { code body = [{ return $x; }]; }
+
+---
+
+(source_file
+  (class_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (code_literal
+          (code_chunk)
+          (variable_substitution
+            (identifier))
+          (code_chunk))))))
