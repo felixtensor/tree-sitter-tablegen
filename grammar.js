@@ -24,7 +24,9 @@ export default grammar({
     _top_level_item: $ => choice(
       $.include_directive,
       $.preprocessor_directive,
-      // class/def/etc populated by later tasks
+      $.class_definition,
+      $.def_definition,
+      // more to come in later tasks
     ),
 
     include_directive: $ => seq("include", $.string_literal),
@@ -84,5 +86,95 @@ export default grammar({
     ),
 
     type: $ => $._type,         // visible alias for queries
+
+    // Task 5: class, def, body items
+    class_definition: $ => seq(
+      "class",
+      $.identifier,
+      optional($.template_parameters),       // declared in Task 6
+      optional($.parent_class_list),
+      $.body,
+    ),
+
+    def_definition: $ => seq(
+      "def",
+      optional($._value),                    // _value declared below; temporary stub
+      optional($.parent_class_list),
+      $.body,
+    ),
+
+    parent_class_list: $ => seq(
+      ":",
+      $.parent_class,
+      repeat(seq(",", $.parent_class)),
+    ),
+
+    parent_class: $ => seq(
+      $.identifier,
+      optional(seq("<", optional($.argument_list), ">")),  // argument_list in Task 9
+    ),
+
+    body: $ => choice(
+      ";",
+      seq("{", repeat($._body_item), "}"),
+    ),
+
+    _body_item: $ => choice(
+      $.field_declaration,
+      $.let_assignment,
+      $.defvar_statement,
+      $.assert_statement,
+      // foreach/if/dump added in later tasks
+    ),
+
+    field_declaration: $ => seq(
+      optional("field"),
+      $.type,
+      $.identifier,
+      optional(seq("=", $._value)),
+      ";",
+    ),
+
+    let_assignment: $ => seq(
+      "let",
+      optional($.let_mode),
+      $.identifier,
+      optional($.range_list),                // range_list in Task 7
+      "=",
+      $._value,
+      ";",
+    ),
+
+    let_mode: _ => choice("append", "prepend"),
+
+    defvar_statement: $ => seq(
+      "defvar",
+      $.identifier,
+      "=",
+      $._value,
+      ";",
+    ),
+
+    assert_statement: $ => seq(
+      "assert",
+      $._value,
+      ",",
+      $._value,
+      ";",
+    ),
+
+    // Temporary stub for _value - will be expanded in Task 7
+    _value: $ => choice(
+      $.identifier,
+      $.integer_literal,
+      $.string_literal,
+      $.boolean_literal,
+      $.unset_value,
+    ),
+
+    // Forward declarations for rules defined in later tasks
+    template_parameters: _ => seq("<", ">"),
+    argument_list: $ => $.identifier,
+    range_list: $ => seq("[", $.integer_literal, "]"),
   },
 });

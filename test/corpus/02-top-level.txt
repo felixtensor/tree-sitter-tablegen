@@ -7,7 +7,8 @@ include "foo.td"
 ---
 
 (source_file
-  (include_directive (string_literal)))
+  (include_directive
+    (string_literal)))
 
 ==================
 Preprocessor define
@@ -18,7 +19,8 @@ Preprocessor define
 ---
 
 (source_file
-  (preprocessor_directive (macro_name)))
+  (preprocessor_directive
+    (macro_name)))
 
 ==================
 Preprocessor ifdef ifndef else endif
@@ -33,8 +35,91 @@ Preprocessor ifdef ifndef else endif
 ---
 
 (source_file
-  (preprocessor_directive (macro_name))
+  (preprocessor_directive
+    (macro_name))
   (preprocessor_directive)
-  (preprocessor_directive (macro_name))
+  (preprocessor_directive
+    (macro_name))
   (preprocessor_directive)
   (preprocessor_directive))
+
+==================
+Empty class
+==================
+
+class C;
+
+---
+
+(source_file
+  (class_definition
+    (identifier)
+    (body)))
+
+==================
+Class with body
+==================
+
+class C { int a = 1; string b; }
+
+---
+
+(source_file
+  (class_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (integer_literal))
+      (field_declaration
+        (type)
+        (identifier)))))
+
+==================
+Class with field keyword prefix and inheritance
+==================
+
+class C : Parent { field int a; }
+
+---
+
+(source_file
+  (class_definition
+    (identifier)
+    (parent_class_list
+      (parent_class
+        (identifier)))
+    (body
+      (field_declaration
+        (type)
+        (identifier)))))
+
+==================
+Def with body and let assignment
+==================
+
+def D : Parent { let foo = 1; let append bar = 2; defvar v = 3; assert v, "msg"; }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (parent_class_list
+      (parent_class
+        (identifier)))
+    (body
+      (let_assignment
+        (identifier)
+        (integer_literal))
+      (let_assignment
+        (let_mode)
+        (identifier)
+        (integer_literal))
+      (defvar_statement
+        (identifier)
+        (integer_literal))
+      (assert_statement
+        (identifier)
+        (string_literal)))))
