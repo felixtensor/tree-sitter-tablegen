@@ -172,9 +172,27 @@ export default grammar({
       $.unset_value,
     ),
 
-    // Forward declarations for rules defined in later tasks
-    template_parameters: _ => seq("<", ">"),
-    argument_list: $ => $.identifier,
+    template_parameters: $ => seq(
+      "<",
+      $.template_parameter,
+      repeat(seq(",", $.template_parameter)),
+      ">",
+    ),
+
+    template_parameter: $ => seq(
+      $.type,
+      $.identifier,
+      optional(seq("=", $._value)),
+    ),
+
+    // Argument list: positional then named (per spec §4.3); used by parent_class
+    // and (in Task 8) anonymous_record. Final form lands in Task 9.
+    argument_list: $ => seq(
+      $._value,
+      repeat(seq(",", $._value)),
+    ),
+
+    // Forward declaration for rule defined in later task
     range_list: $ => seq("[", $.integer_literal, "]"),
   },
 });

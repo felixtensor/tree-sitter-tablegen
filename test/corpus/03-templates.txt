@@ -1,0 +1,38 @@
+==================
+Class with template parameters
+==================
+
+class C<int N, string s = "x"> { int n = N; }
+
+---
+
+(source_file
+  (class_definition
+    (identifier)
+    (template_parameters
+      (template_parameter (type) (identifier))
+      (template_parameter (type) (identifier) (string_literal)))
+    (body
+      (field_declaration (type) (identifier) (identifier)))))
+
+==================
+Class with multiple parents and type-arg parents
+==================
+
+class C<int N> : A, B<N>, C<"x", 1> { }
+
+---
+
+(source_file
+  (class_definition
+    (identifier)
+    (template_parameters (template_parameter (type) (identifier)))
+    (parent_class_list
+      (parent_class (identifier))
+      (parent_class
+        (identifier)
+        (argument_list (identifier)))
+      (parent_class
+        (identifier)
+        (argument_list (string_literal) (integer_literal))))
+    (body)))
