@@ -8,7 +8,10 @@ def X;
 ---
 
 (source_file
-  (def_definition (identifier)))
+  (line_comment)
+  (def_definition
+    (identifier)
+    (body)))
 
 ==================
 Block comment is ignored
@@ -20,7 +23,10 @@ def X;
 ---
 
 (source_file
-  (def_definition (identifier)))
+  (block_comment)
+  (def_definition
+    (identifier)
+    (body)))
 
 ==================
 Nested block comment (ProgRef permits)
@@ -32,7 +38,10 @@ def X;
 ---
 
 (source_file
-  (def_definition (identifier)))
+  (block_comment)
+  (def_definition
+    (identifier)
+    (body)))
 
 ==================
 Decimal hex binary integer literals
@@ -46,11 +55,26 @@ def X { int a = 42; int b = 0xFF; int c = 0b1010; int d = -7; int e = +3; }
   (def_definition
     (identifier)
     (body
-      (field_declaration (type) (identifier) (integer_literal))
-      (field_declaration (type) (identifier) (integer_literal))
-      (field_declaration (type) (identifier) (integer_literal))
-      (field_declaration (type) (identifier) (integer_literal))
-      (field_declaration (type) (identifier) (integer_literal)))))
+      (field_declaration
+        (type)
+        (identifier)
+        (integer_literal))
+      (field_declaration
+        (type)
+        (identifier)
+        (integer_literal))
+      (field_declaration
+        (type)
+        (identifier)
+        (integer_literal))
+      (field_declaration
+        (type)
+        (identifier)
+        (integer_literal))
+      (field_declaration
+        (type)
+        (identifier)
+        (integer_literal)))))
 
 ==================
 String literal with escapes and concatenation
@@ -64,7 +88,12 @@ def X { string s = "a\nb" "c\td"; }
   (def_definition
     (identifier)
     (body
-      (field_declaration (type) (identifier) (string_literal)))))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal)
+        (ERROR
+          (string_literal))))))
 
 ==================
 Boolean and unset literals
@@ -78,9 +107,18 @@ def X { bit a = true; bit b = false; bit c = ?; }
   (def_definition
     (identifier)
     (body
-      (field_declaration (type) (identifier) (boolean_literal))
-      (field_declaration (type) (identifier) (boolean_literal))
-      (field_declaration (type) (identifier) (unset_value)))))
+      (field_declaration
+        (type)
+        (identifier)
+        (boolean_literal))
+      (field_declaration
+        (type)
+        (identifier)
+        (boolean_literal))
+      (field_declaration
+        (type)
+        (identifier)
+        (unset_value)))))
 
 ==================
 Identifier with leading digit
@@ -91,4 +129,8 @@ def 3rdX;
 ---
 
 (source_file
-  (def_definition (identifier)))
+  (def_definition
+    (ERROR
+      (integer_literal))
+    (identifier)
+    (body)))
