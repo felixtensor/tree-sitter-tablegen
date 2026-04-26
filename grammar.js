@@ -30,7 +30,13 @@ export default grammar({
       $.preprocessor_directive,
       $.class_definition,
       $.def_definition,
-      // more to come in later tasks
+      $.defm_definition,
+      $.defset_definition,
+      $.deftype_definition,
+      $.defvar_statement,
+      $.dump_statement,
+      $.assert_statement,
+      // foreach/if/let/multiclass next task
     ),
 
     include_directive: $ => seq("include", $.string_literal),
@@ -104,6 +110,33 @@ export default grammar({
       optional($.parent_class_list),
       $.body,
     ),
+
+    defm_definition: $ => seq(
+      "defm",
+      optional($._value),
+      optional($.parent_class_list),
+      ";",
+    ),
+
+    defset_definition: $ => seq(
+      "defset",
+      $.type,
+      $.identifier,
+      "=",
+      "{",
+      repeat($._top_level_item),
+      "}",
+    ),
+
+    deftype_definition: $ => seq(
+      "deftype",
+      $.identifier,
+      "=",
+      $.type,
+      ";",
+    ),
+
+    dump_statement: $ => seq("dump", $._value, ";"),
 
     parent_class_list: $ => seq(
       ":",

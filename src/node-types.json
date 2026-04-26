@@ -634,7 +634,231 @@
     }
   },
   {
+    "type": "defm_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
+          "type": "bang_operator_call",
+          "named": true
+        },
+        {
+          "type": "bits_value",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cond_operator_call",
+          "named": true
+        },
+        {
+          "type": "dag_value",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "list_value",
+          "named": true
+        },
+        {
+          "type": "parent_class_list",
+          "named": true
+        },
+        {
+          "type": "paste_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unset_value",
+          "named": true
+        },
+        {
+          "type": "value_suffix_braces",
+          "named": true
+        },
+        {
+          "type": "value_suffix_brackets",
+          "named": true
+        },
+        {
+          "type": "value_suffix_dot",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "defset_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assert_statement",
+          "named": true
+        },
+        {
+          "type": "class_definition",
+          "named": true
+        },
+        {
+          "type": "def_definition",
+          "named": true
+        },
+        {
+          "type": "defm_definition",
+          "named": true
+        },
+        {
+          "type": "defset_definition",
+          "named": true
+        },
+        {
+          "type": "deftype_definition",
+          "named": true
+        },
+        {
+          "type": "defvar_statement",
+          "named": true
+        },
+        {
+          "type": "dump_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "deftype_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "defvar_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
+          "type": "bang_operator_call",
+          "named": true
+        },
+        {
+          "type": "bits_value",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cond_operator_call",
+          "named": true
+        },
+        {
+          "type": "dag_value",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "list_value",
+          "named": true
+        },
+        {
+          "type": "paste_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unset_value",
+          "named": true
+        },
+        {
+          "type": "value_suffix_braces",
+          "named": true
+        },
+        {
+          "type": "value_suffix_brackets",
+          "named": true
+        },
+        {
+          "type": "value_suffix_dot",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dump_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -1341,11 +1565,35 @@
       "required": false,
       "types": [
         {
+          "type": "assert_statement",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
         {
           "type": "def_definition",
+          "named": true
+        },
+        {
+          "type": "defm_definition",
+          "named": true
+        },
+        {
+          "type": "defset_definition",
+          "named": true
+        },
+        {
+          "type": "deftype_definition",
+          "named": true
+        },
+        {
+          "type": "defvar_statement",
+          "named": true
+        },
+        {
+          "type": "dump_statement",
           "named": true
         },
         {
@@ -1851,7 +2099,23 @@
     "named": false
   },
   {
+    "type": "defm",
+    "named": false
+  },
+  {
+    "type": "defset",
+    "named": false
+  },
+  {
+    "type": "deftype",
+    "named": false
+  },
+  {
     "type": "defvar",
+    "named": false
+  },
+  {
+    "type": "dump",
     "named": false
   },
   {
