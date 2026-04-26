@@ -1,5 +1,24 @@
 [
   {
+    "type": "anonymous_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "argument_list",
     "named": true,
     "fields": {},
@@ -7,6 +26,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
         {
           "type": "bits_value",
           "named": true
@@ -67,6 +90,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
           "type": "bits_value",
           "named": true
         },
@@ -125,6 +152,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
         {
           "type": "bits_value",
           "named": true
@@ -244,6 +275,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
           "type": "bits_value",
           "named": true
         },
@@ -307,6 +342,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
           "type": "bits_value",
           "named": true
         },
@@ -365,6 +404,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
         {
           "type": "bits_value",
           "named": true
@@ -433,6 +476,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
           "type": "bits_value",
           "named": true
         },
@@ -491,6 +538,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
         {
           "type": "bits_value",
           "named": true
@@ -570,6 +621,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
           "type": "bits_value",
           "named": true
         },
@@ -641,6 +696,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
         {
           "type": "bits_value",
           "named": true
@@ -738,6 +797,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
         {
           "type": "bits_value",
           "named": true
@@ -843,6 +906,10 @@
       "required": true,
       "types": [
         {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
           "type": "bits_value",
           "named": true
         },
@@ -929,6 +996,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
         {
           "type": "bits_value",
           "named": true
