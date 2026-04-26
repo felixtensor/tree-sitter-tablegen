@@ -1,0 +1,76 @@
+==================
+Empty code block
+==================
+
+def D { code c = [{}]; }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (code_literal)))))
+
+==================
+Code block with text only
+==================
+
+def D { code c = [{ int x = 1; }]; }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (code_literal
+          (code_chunk))))))
+
+==================
+Code block with variable substitution
+==================
+
+def D { code c = [{ return $value + $other; }]; }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (code_literal
+          (code_chunk)
+          (variable_substitution
+            (identifier))
+          (code_chunk)
+          (variable_substitution
+            (identifier))
+          (code_chunk))))))
+
+==================
+Code block conservative termination on first }]
+==================
+
+def D { code c = [{ if (x) { return; } }]; }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (code_literal
+          (code_chunk))))))
