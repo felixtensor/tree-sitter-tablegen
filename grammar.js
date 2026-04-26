@@ -10,10 +10,6 @@
 export default grammar({
   name: "tablegen",
 
-  conflicts: $ => [
-    [$._value, $.body],
-  ],
-
   extras: $ => [
     /\s+/,
     $.line_comment,
@@ -61,9 +57,7 @@ export default grammar({
 
     identifier: _ => token(prec(-1, /[0-9]*[A-Za-z_][A-Za-z0-9_]*/)),
 
-    integer_literal: _ => token(choice(
-      /[+-]?(0x[0-9a-fA-F]+|0b[01]+|[0-9]+)/,
-    )),
+    integer_literal: _ => token(/[+-]?(0x[0-9a-fA-F]+|0b[01]+|[0-9]+)/),
 
     string_literal: _ => token(seq(
       '"',

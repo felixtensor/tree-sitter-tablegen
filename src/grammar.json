@@ -195,13 +195,8 @@
     "integer_literal": {
       "type": "TOKEN",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[+-]?(0x[0-9a-fA-F]+|0b[01]+|[0-9]+)"
-          }
-        ]
+        "type": "PATTERN",
+        "value": "[+-]?(0x[0-9a-fA-F]+|0b[01]+|[0-9]+)"
       }
     },
     "string_literal": {
@@ -1336,12 +1331,7 @@
       "name": "block_comment"
     }
   ],
-  "conflicts": [
-    [
-      "_value",
-      "body"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],
