@@ -280,7 +280,19 @@
           "named": true
         },
         {
+          "type": "dump_statement",
+          "named": true
+        },
+        {
           "type": "field_declaration",
+          "named": true
+        },
+        {
+          "type": "foreach_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
           "named": true
         },
         {
@@ -749,11 +761,27 @@
           "named": true
         },
         {
+          "type": "foreach_statement",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
+          "type": "if_statement",
+          "named": true
+        },
+        {
           "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "multiclass_definition",
           "named": true
         },
         {
@@ -1004,6 +1032,268 @@
     }
   },
   {
+    "type": "foreach_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
+          "type": "assert_statement",
+          "named": true
+        },
+        {
+          "type": "bang_operator_call",
+          "named": true
+        },
+        {
+          "type": "bits_value",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "class_definition",
+          "named": true
+        },
+        {
+          "type": "cond_operator_call",
+          "named": true
+        },
+        {
+          "type": "dag_value",
+          "named": true
+        },
+        {
+          "type": "def_definition",
+          "named": true
+        },
+        {
+          "type": "defm_definition",
+          "named": true
+        },
+        {
+          "type": "defset_definition",
+          "named": true
+        },
+        {
+          "type": "deftype_definition",
+          "named": true
+        },
+        {
+          "type": "defvar_statement",
+          "named": true
+        },
+        {
+          "type": "dump_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "list_value",
+          "named": true
+        },
+        {
+          "type": "multiclass_definition",
+          "named": true
+        },
+        {
+          "type": "paste_expression",
+          "named": true
+        },
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "range_list",
+          "named": true
+        },
+        {
+          "type": "range_piece",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unset_value",
+          "named": true
+        },
+        {
+          "type": "value_suffix_braces",
+          "named": true
+        },
+        {
+          "type": "value_suffix_brackets",
+          "named": true
+        },
+        {
+          "type": "value_suffix_dot",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
+          "type": "assert_statement",
+          "named": true
+        },
+        {
+          "type": "bang_operator_call",
+          "named": true
+        },
+        {
+          "type": "bits_value",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "class_definition",
+          "named": true
+        },
+        {
+          "type": "cond_operator_call",
+          "named": true
+        },
+        {
+          "type": "dag_value",
+          "named": true
+        },
+        {
+          "type": "def_definition",
+          "named": true
+        },
+        {
+          "type": "defm_definition",
+          "named": true
+        },
+        {
+          "type": "defset_definition",
+          "named": true
+        },
+        {
+          "type": "deftype_definition",
+          "named": true
+        },
+        {
+          "type": "defvar_statement",
+          "named": true
+        },
+        {
+          "type": "dump_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "list_value",
+          "named": true
+        },
+        {
+          "type": "multiclass_definition",
+          "named": true
+        },
+        {
+          "type": "paste_expression",
+          "named": true
+        },
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unset_value",
+          "named": true
+        },
+        {
+          "type": "value_suffix_braces",
+          "named": true
+        },
+        {
+          "type": "value_suffix_brackets",
+          "named": true
+        },
+        {
+          "type": "value_suffix_dot",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "include_directive",
     "named": true,
     "fields": {},
@@ -1098,9 +1388,159 @@
     }
   },
   {
+    "type": "let_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
+          "type": "bang_operator_call",
+          "named": true
+        },
+        {
+          "type": "bits_value",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "cond_operator_call",
+          "named": true
+        },
+        {
+          "type": "dag_value",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "let_mode",
+          "named": true
+        },
+        {
+          "type": "list_value",
+          "named": true
+        },
+        {
+          "type": "paste_expression",
+          "named": true
+        },
+        {
+          "type": "range_list",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unset_value",
+          "named": true
+        },
+        {
+          "type": "value_suffix_braces",
+          "named": true
+        },
+        {
+          "type": "value_suffix_brackets",
+          "named": true
+        },
+        {
+          "type": "value_suffix_dot",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "let_mode",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "let_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assert_statement",
+          "named": true
+        },
+        {
+          "type": "class_definition",
+          "named": true
+        },
+        {
+          "type": "def_definition",
+          "named": true
+        },
+        {
+          "type": "defm_definition",
+          "named": true
+        },
+        {
+          "type": "defset_definition",
+          "named": true
+        },
+        {
+          "type": "deftype_definition",
+          "named": true
+        },
+        {
+          "type": "defvar_statement",
+          "named": true
+        },
+        {
+          "type": "dump_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "let_item",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "multiclass_definition",
+          "named": true
+        },
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "list_value",
@@ -1172,6 +1612,57 @@
         },
         {
           "type": "value_suffix_dot",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multiclass_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assert_statement",
+          "named": true
+        },
+        {
+          "type": "def_definition",
+          "named": true
+        },
+        {
+          "type": "defm_definition",
+          "named": true
+        },
+        {
+          "type": "defvar_statement",
+          "named": true
+        },
+        {
+          "type": "foreach_statement",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "parent_class_list",
+          "named": true
+        },
+        {
+          "type": "template_parameters",
           "named": true
         }
       ]
@@ -1597,7 +2088,23 @@
           "named": true
         },
         {
+          "type": "foreach_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
           "type": "include_directive",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "multiclass_definition",
           "named": true
         },
         {
@@ -2119,6 +2626,10 @@
     "named": false
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
     "type": "false",
     "named": false
   },
@@ -2127,8 +2638,20 @@
     "named": false
   },
   {
+    "type": "foreach",
+    "named": false
+  },
+  {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "in",
+    "named": false
   },
   {
     "type": "include",
@@ -2160,6 +2683,10 @@
     "named": true
   },
   {
+    "type": "multiclass",
+    "named": false
+  },
+  {
     "type": "prepend",
     "named": false
   },
@@ -2170,6 +2697,10 @@
   {
     "type": "string_literal",
     "named": true
+  },
+  {
+    "type": "then",
+    "named": false
   },
   {
     "type": "true",
