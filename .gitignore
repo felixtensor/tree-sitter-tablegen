@@ -1,5 +1,6 @@
 # Rust artifacts
 target/
+Cargo.lock
 
 # Node artifacts
 build/
@@ -8,6 +9,7 @@ node_modules/
 
 # Swift artifacts
 .build/
+Package.resolved
 
 # Go artifacts
 _obj/
@@ -33,9 +35,6 @@ dist/
 zig-cache/
 zig-out/
 
-# Example dirs
-/examples/*/
-
 # Grammar volatiles
 *.wasm
 *.obj
@@ -46,3 +45,13 @@ zig-out/
 *.tgz
 *.zip
 *.jar
+
+# ide files
+.idea/
+.cursor/
+.vscode/
+.trae/
+.zed/
+
+# temporary files
+tmp/
