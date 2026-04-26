@@ -31,8 +31,8 @@ class C<int N> : A, B<N>, C<"x", 1> { }
       (parent_class (identifier))
       (parent_class
         (identifier)
-        (argument_list (identifier)))
+        (argument_list (positional_arguments (identifier))))
       (parent_class
         (identifier)
-        (argument_list (string_literal) (integer_literal))))
+        (argument_list (positional_arguments (string_literal) (integer_literal)))))
     (body)))

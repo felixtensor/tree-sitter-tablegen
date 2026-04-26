@@ -18,6 +18,10 @@ export default grammar({
 
   word: $ => $.identifier,
 
+  conflicts: $ => [
+    [$.positional_arguments],
+  ],
+
   rules: {
     source_file: $ => repeat($._top_level_item),
 
@@ -277,11 +281,26 @@ export default grammar({
       optional(seq("=", $._value)),
     ),
 
-    // Argument list: positional then named (per spec §4.3); used by parent_class
-    // and (in Task 8) anonymous_record. Final form lands in Task 9.
-    argument_list: $ => seq(
+    // Task 9: Full argument list with positional + named arguments
+    argument_list: $ => choice(
+      seq($.positional_arguments, optional(seq(",", $.named_arguments))),
+      $.named_arguments,
+    ),
+
+    positional_arguments: $ => seq(
       $._value,
       repeat(seq(",", $._value)),
+    ),
+
+    named_arguments: $ => seq(
+      $.named_argument,
+      repeat(seq(",", $.named_argument)),
+    ),
+
+    named_argument: $ => seq(
+      $.identifier,
+      "=",
+      $._value,
     ),
 
   },
