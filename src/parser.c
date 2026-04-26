@@ -123,47 +123,67 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
   eof = lexer->eof(lexer);
   switch (state) {
     case 0:
-      if (eof) ADVANCE(4);
+      if (eof) ADVANCE(8);
       if (lookahead == '/') ADVANCE(1);
-      if (lookahead == ';') ADVANCE(5);
+      if (lookahead == ';') ADVANCE(9);
       if (('\t' <= lookahead && lookahead <= '\r') ||
           lookahead == ' ') SKIP(0);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(7);
       if (('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(8);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(12);
       END_STATE();
     case 1:
       if (lookahead == '*') ADVANCE(2);
-      if (lookahead == '/') ADVANCE(6);
+      if (lookahead == '/') ADVANCE(10);
       END_STATE();
     case 2:
-      if (lookahead == '*') ADVANCE(3);
+      if (lookahead == '*') ADVANCE(6);
+      if (lookahead == '/') ADVANCE(4);
       if (lookahead != 0) ADVANCE(2);
       END_STATE();
     case 3:
-      if (lookahead == '/') ADVANCE(7);
-      if (lookahead != 0) ADVANCE(2);
+      if (lookahead == '*') ADVANCE(5);
+      if (lookahead != 0) ADVANCE(3);
       END_STATE();
     case 4:
-      ACCEPT_TOKEN(ts_builtin_sym_end);
+      if (lookahead == '*') ADVANCE(3);
+      if (lookahead != 0) ADVANCE(2);
       END_STATE();
     case 5:
-      ACCEPT_TOKEN(anon_sym_SEMI);
+      if (lookahead == '/') ADVANCE(2);
+      if (lookahead != 0) ADVANCE(3);
       END_STATE();
     case 6:
-      ACCEPT_TOKEN(sym_line_comment);
-      if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(6);
+      if (lookahead == '/') ADVANCE(11);
+      if (lookahead != 0) ADVANCE(2);
       END_STATE();
     case 7:
-      ACCEPT_TOKEN(sym_block_comment);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(7);
+      if (('A' <= lookahead && lookahead <= 'Z') ||
+          lookahead == '_' ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(12);
       END_STATE();
     case 8:
+      ACCEPT_TOKEN(ts_builtin_sym_end);
+      END_STATE();
+    case 9:
+      ACCEPT_TOKEN(anon_sym_SEMI);
+      END_STATE();
+    case 10:
+      ACCEPT_TOKEN(sym_line_comment);
+      if (lookahead != 0 &&
+          lookahead != '\n') ADVANCE(10);
+      END_STATE();
+    case 11:
+      ACCEPT_TOKEN(sym_block_comment);
+      END_STATE();
+    case 12:
       ACCEPT_TOKEN(sym_identifier);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(8);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(12);
       END_STATE();
     default:
       return false;
