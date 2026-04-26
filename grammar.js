@@ -22,11 +22,22 @@ export default grammar({
     source_file: $ => repeat($._top_level_item),
 
     _top_level_item: $ => choice(
-      // populated incrementally by later tasks
-      $._placeholder_top_item,
+      $.include_directive,
+      $.preprocessor_directive,
+      // class/def/etc populated by later tasks
     ),
 
-    _placeholder_top_item: $ => seq("__placeholder__", ";"),
+    include_directive: $ => seq("include", $.string_literal),
+
+    preprocessor_directive: $ => choice(
+      seq("#define", $.macro_name),
+      seq("#ifdef", $.macro_name),
+      seq("#ifndef", $.macro_name),
+      "#else",
+      "#endif",
+    ),
+
+    macro_name: _ => /[A-Za-z_][A-Za-z0-9_]*/,
 
     line_comment: _ => token(seq("//", /[^\n]*/)),
 

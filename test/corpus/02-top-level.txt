@@ -1,0 +1,40 @@
+==================
+Include directive
+==================
+
+include "foo.td"
+
+---
+
+(source_file
+  (include_directive (string_literal)))
+
+==================
+Preprocessor define
+==================
+
+#define FOO
+
+---
+
+(source_file
+  (preprocessor_directive (macro_name)))
+
+==================
+Preprocessor ifdef ifndef else endif
+==================
+
+#ifdef FOO
+#endif
+#ifndef BAR
+#else
+#endif
+
+---
+
+(source_file
+  (preprocessor_directive (macro_name))
+  (preprocessor_directive)
+  (preprocessor_directive (macro_name))
+  (preprocessor_directive)
+  (preprocessor_directive))
