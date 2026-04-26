@@ -60,5 +60,18 @@ export default grammar({
     boolean_literal: _ => choice("true", "false"),
 
     unset_value: _ => "?",
+
+    _type: $ => choice(
+      "bit",
+      "int",
+      "string",
+      "dag",
+      "code",
+      seq("bits", "<", $.integer_literal, ">"),
+      seq("list", "<", $._type, ">"),
+      $.identifier,             // ClassID
+    ),
+
+    type: $ => $._type,         // visible alias for queries
   },
 });
