@@ -71,3 +71,72 @@ dump "hello";
     (integer_literal))
   (dump_statement
     (string_literal)))
+
+==================
+Foreach over range and list
+==================
+
+foreach i = 0...3 in {
+  def X;
+}
+foreach j = [1, 2, 3] in def Y;
+
+---
+
+(source_file
+  (foreach_statement (identifier) (range_piece (integer_literal) (integer_literal))
+    (def_definition (identifier) (body)))
+  (foreach_statement (identifier) (list_value (integer_literal) (integer_literal) (integer_literal))
+    (def_definition (identifier) (body))))
+
+==================
+If then else
+==================
+
+if true then {
+  def A;
+} else {
+  def B;
+}
+
+---
+
+(source_file
+  (if_statement (boolean_literal)
+    (def_definition (identifier) (body))
+    (def_definition (identifier) (body))))
+
+==================
+Let in block
+==================
+
+let x = 1, append y = 2 in {
+  def A;
+}
+
+---
+
+(source_file
+  (let_statement
+    (let_item (identifier) (integer_literal))
+    (let_item (let_mode) (identifier) (integer_literal))
+    (def_definition (identifier) (body))))
+
+==================
+Multiclass with body
+==================
+
+multiclass MC<int N> {
+  def A;
+  defm B : Foo;
+  defvar v = N;
+}
+
+---
+
+(source_file
+  (multiclass_definition (identifier)
+    (template_parameters (template_parameter (type) (identifier)))
+    (def_definition (identifier) (body))
+    (defm_definition (identifier) (parent_class_list (parent_class (identifier))))
+    (defvar_statement (identifier) (identifier))))

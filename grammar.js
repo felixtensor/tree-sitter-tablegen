@@ -20,6 +20,7 @@ export default grammar({
 
   conflicts: $ => [
     [$.positional_arguments],
+    [$.range_piece, $._simple_value],
   ],
 
   rules: {
@@ -36,7 +37,10 @@ export default grammar({
       $.defvar_statement,
       $.dump_statement,
       $.assert_statement,
-      // foreach/if/let/multiclass next task
+      $.foreach_statement,
+      $.if_statement,
+      $.let_statement,
+      $.multiclass_definition,
     ),
 
     include_directive: $ => seq("include", $.string_literal),
@@ -138,6 +142,70 @@ export default grammar({
 
     dump_statement: $ => seq("dump", $._value, ";"),
 
+    foreach_statement: $ => seq(
+      "foreach",
+      $.identifier,
+      "=",
+      choice($.range_list, $.range_piece, $._value),
+      "in",
+      choice(
+        seq("{", repeat($._top_level_item), "}"),
+        $._top_level_item,
+      ),
+    ),
+
+    if_statement: $ => prec.right(seq(
+      "if",
+      $._value,
+      "then",
+      $._if_body,
+      optional(seq("else", $._if_body)),
+    )),
+
+    _if_body: $ => choice(
+      seq("{", repeat($._top_level_item), "}"),
+      $._top_level_item,
+    ),
+
+    let_statement: $ => seq(
+      "let",
+      $.let_item,
+      repeat(seq(",", $.let_item)),
+      "in",
+      choice(
+        seq("{", repeat($._top_level_item), "}"),
+        $._top_level_item,
+      ),
+    ),
+
+    let_item: $ => seq(
+      optional($.let_mode),
+      $.identifier,
+      optional($.range_list),
+      "=",
+      $._value,
+    ),
+
+    multiclass_definition: $ => seq(
+      "multiclass",
+      $.identifier,
+      optional($.template_parameters),
+      optional($.parent_class_list),
+      "{",
+      repeat($._multiclass_body_item),
+      "}",
+    ),
+
+    _multiclass_body_item: $ => choice(
+      $.def_definition,
+      $.defm_definition,
+      $.defvar_statement,
+      $.foreach_statement,
+      $.if_statement,
+      $.let_statement,
+      $.assert_statement,
+    ),
+
     parent_class_list: $ => seq(
       ":",
       $.parent_class,
@@ -160,7 +228,9 @@ export default grammar({
       $.let_assignment,
       $.defvar_statement,
       $.assert_statement,
-      // foreach/if/dump added in later tasks
+      $.foreach_statement,
+      $.if_statement,
+      $.dump_statement,
     ),
 
     field_declaration: $ => seq(
