@@ -117,3 +117,47 @@ def D : C<1, 2, name=3, other="x">;
             (named_argument (identifier) (integer_literal))
             (named_argument (identifier) (string_literal))))))
     (body)))
+
+==================
+Bang operator basic forms
+==================
+
+def D {
+  int a = !add(1, 2);
+  int b = !cast<int>(x);
+  list<int> c = !listconcat([1], [2]);
+  int d = !if(true, 1, 0);
+}
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration (type) (identifier)
+        (bang_operator_call (bang_operator) (integer_literal) (integer_literal)))
+      (field_declaration (type) (identifier)
+        (bang_operator_call (bang_operator) (type) (identifier)))
+      (field_declaration (type) (identifier)
+        (bang_operator_call (bang_operator) (list_value (integer_literal)) (list_value (integer_literal))))
+      (field_declaration (type) (identifier)
+        (bang_operator_call (bang_operator) (boolean_literal) (integer_literal) (integer_literal))))))
+
+==================
+Cond operator
+==================
+
+def D { int x = !cond(a: 1, b: 2, true: 0); }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration (type) (identifier)
+        (cond_operator_call
+          (cond_clause (identifier) (integer_literal))
+          (cond_clause (identifier) (integer_literal))
+          (cond_clause (boolean_literal) (integer_literal)))))))

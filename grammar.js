@@ -188,6 +188,8 @@ export default grammar({
       $.list_value,
       $.dag_value,
       $.anonymous_record,
+      $.bang_operator_call,
+      $.cond_operator_call,
       $.identifier,
     ),
 
@@ -302,6 +304,35 @@ export default grammar({
       "=",
       $._value,
     ),
+
+    bang_operator: _ => choice(
+      "!add", "!and", "!cast", "!con", "!dag", "!div", "!empty", "!eq", "!exists", "!filter",
+      "!find", "!foldl", "!foreach", "!ge", "!getdagarg", "!getdagname", "!getdagop", "!getdagopname",
+      "!gt", "!head", "!if", "!initialized", "!instances", "!interleave", "!isa", "!le",
+      "!listconcat", "!listflatten", "!listremove", "!listsplat", "!logtwo", "!lt", "!match",
+      "!mul", "!ne", "!not", "!or", "!range", "!repr", "!setdagarg", "!setdagname",
+      "!setdagop", "!setdagopname", "!shl", "!size", "!sra", "!srl", "!strconcat", "!sub",
+      "!subst", "!substr", "!tail", "!tolower", "!toupper", "!xor",
+    ),
+
+    bang_operator_call: $ => seq(
+      $.bang_operator,
+      optional(seq("<", $.type, ">")),
+      "(",
+      $._value,
+      repeat(seq(",", $._value)),
+      ")",
+    ),
+
+    cond_operator_call: $ => seq(
+      "!cond",
+      "(",
+      $.cond_clause,
+      repeat(seq(",", $.cond_clause)),
+      ")",
+    ),
+
+    cond_clause: $ => seq($._value, ":", $._value),
 
   },
 });
