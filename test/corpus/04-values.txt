@@ -96,4 +96,24 @@ def D { Foo x = MyClass<1, "y">; }
     (body
       (field_declaration (type (identifier)) (identifier)
         (anonymous_record (identifier)
-          (argument_list (integer_literal) (string_literal)))))))
+          (argument_list (positional_arguments (integer_literal) (string_literal))))))))
+
+==================
+Named arguments after positional
+==================
+
+def D : C<1, 2, name=3, other="x">;
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (parent_class_list
+      (parent_class (identifier)
+        (argument_list
+          (positional_arguments (integer_literal) (integer_literal))
+          (named_arguments
+            (named_argument (identifier) (integer_literal))
+            (named_argument (identifier) (string_literal))))))
+    (body)))
