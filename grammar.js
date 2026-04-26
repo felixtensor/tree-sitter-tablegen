@@ -29,7 +29,36 @@ export default grammar({
     _placeholder_top_item: $ => seq("__placeholder__", ";"),
 
     line_comment: _ => token(seq("//", /[^\n]*/)),
-    block_comment: _ => token(seq("/*", /([^*]|\*[^/])*/, "*/")),
-    identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
+
+    // One level of nesting via two-state regex; see spec §5.6 for upgrade path
+    block_comment: _ => token(seq(
+      "/*",
+      repeat(choice(
+        /[^*/]/,
+        /\*[^/]/,
+        /\/[^*]/,
+        seq("/*", repeat(choice(/[^*]/, /\*[^/]/)), "*/"),
+      )),
+      "*/",
+    )),
+
+    identifier: _ => token(prec(-1, /[0-9]*[A-Za-z_][A-Za-z0-9_]*/)),
+
+    integer_literal: _ => token(choice(
+      /[+-]?(0x[0-9a-fA-F]+|0b[01]+|[0-9]+)/,
+    )),
+
+    string_literal: _ => token(seq(
+      '"',
+      repeat(choice(
+        /[^"\\\n]/,
+        /\\["\\tn']/,
+      )),
+      '"',
+    )),
+
+    boolean_literal: _ => choice("true", "false"),
+
+    unset_value: _ => "?",
   },
 });
