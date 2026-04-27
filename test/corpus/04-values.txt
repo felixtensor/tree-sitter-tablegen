@@ -31,7 +31,7 @@ def D { bits<4> b = {1, 0, 1, 0}; }
 Dag literal
 ==================
 
-def D { dag x = (op, a, b:$name, $bare); }
+def D { dag x = (op a, b:$name, $bare); }
 
 ---
 
@@ -41,7 +41,7 @@ def D { dag x = (op, a, b:$name, $bare); }
     (body
       (field_declaration (type) (identifier)
         (dag_value
-          (identifier)
+          (dag_arg (identifier))
           (dag_arg (identifier))
           (dag_arg (identifier) (variable_name))
           (dag_arg (variable_name)))))))

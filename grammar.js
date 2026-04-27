@@ -20,6 +20,7 @@ export default grammar({
 
   externals: $ => [
     $.code_chunk,
+    $._leading_digit_ident,
     $._error_sentinel,
   ],
 
@@ -74,11 +75,23 @@ export default grammar({
       "*/",
     )),
 
-    identifier: _ => token(prec(-1, /[0-9]*[A-Za-z_][A-Za-z0-9_]*/)),
+    // TableGen identifiers may start with digits (e.g. `3rdX`, `1OverrideOp`).
+    // We match the broadest run of identifier chars; longest-match keeps purely
+    // numeric tokens (`0xFF`, `123`) on integer_literal because that match is
+    // strictly longer thanks to the `0x`/`0b` prefix or because integer_literal
+    // has higher token-precedence on ties.
+    identifier: _ => token(/[A-Za-z_0-9][A-Za-z0-9_]*/),
 
-    integer_literal: _ => token(/[+-]?(0x[0-9a-fA-F]+|0b[01]+|[0-9]+)/),
+    // Higher token precedence than `identifier` so pure-numeric / hex / binary
+    // tokens lex as integers when they tie identifier in length (`0xFF`, `42`).
+    integer_literal: _ => token(prec(1, /[+-]?(0x[0-9a-fA-F]+|0b[01]+|[0-9]+)/)),
 
-    string_literal: _ => token(seq(
+    // TableGen concatenates adjacent string literals at the parser layer
+    // (TGParser ParseSimpleValue, StrVal case). Reflect that here so a multi-line
+    // wrapped string parses as a single string_literal node.
+    string_literal: $ => prec.left(repeat1($._string_atom)),
+
+    _string_atom: _ => token(seq(
       '"',
       repeat(choice(
         /[^"\\\n]/,
@@ -294,6 +307,12 @@ export default grammar({
     )),
 
     _simple_value: $ => choice(
+      // TableGen accepts record names with leading digits (e.g. `1OverrideOp`,
+      // `3rdX`). Tree-sitter's built-in lexer cannot outrank `integer_literal`
+      // (whose precedence wins ties) without losing on hex/bin tokens. The
+      // external scanner emits the whole name as a single token, surfaced
+      // here as `identifier` so queries continue to match.
+      alias($._leading_digit_ident, $.identifier),
       $.integer_literal,
       $.string_literal,
       $.boolean_literal,
@@ -317,7 +336,13 @@ export default grammar({
       token(seq("}", "]")),
     ),
 
-    variable_substitution: $ => seq("$", $.identifier),
+    // Inside code literals, `$N` (positional) and `$name` are both substitutions
+    // (NativeCodeCall and op assembly format use `$0`, `$1`, ...). The name is
+    // any run of identifier chars including a leading digit; we surface it as
+    // `identifier` so existing queries/highlights continue to apply.
+    variable_substitution: $ => seq("$", alias($._var_name, $.identifier)),
+
+    _var_name: _ => token.immediate(/[A-Za-z0-9_]+/),
 
     anonymous_record: $ => seq(
       $.identifier,
@@ -328,27 +353,30 @@ export default grammar({
 
     bits_value: $ => seq(
       "{",
-      optional(seq($._value, repeat(seq(",", $._value)))),
+      optional(seq($._value, repeat(seq(",", $._value)), optional(","))),
       "}",
     ),
 
     list_value: $ => seq(
       "[",
-      optional(seq($._value, repeat(seq(",", $._value)))),
+      optional(seq($._value, repeat(seq(",", $._value)), optional(","))),
       "]",
       optional(seq("<", $.type, ">")),
     ),
 
+    // TableGen DAG: '(' operator (arg (',' arg)* ','?)? ')'
+    // The operator and the first arg are separated by whitespace, not a comma.
+    // Trailing comma is permitted (TGParser tolerates it in arg lists).
     dag_value: $ => seq(
       "(",
-      $._dag_simple_value,
-      repeat(seq(",", $.dag_arg)),
+      $.dag_arg,
+      optional(seq(
+        $.dag_arg,
+        repeat(seq(",", $.dag_arg)),
+        optional(","),
+      )),
       ")",
     ),
-
-    // A simple value for dag contexts - avoids ambiguity with consecutive identifiers
-    // This is a restricted form of _value that doesn't include paste expressions
-    _dag_simple_value: $ => seq($._simple_value, repeat($._value_suffix)),
 
     dag_arg: $ => choice(
       seq($._value, optional(seq(":", $.variable_name))),
@@ -447,6 +475,7 @@ export default grammar({
       "(",
       $._value,
       repeat(seq(",", $._value)),
+      optional(","),
       ")",
     ),
 
@@ -455,6 +484,7 @@ export default grammar({
       "(",
       $.cond_clause,
       repeat(seq(",", $.cond_clause)),
+      optional(","),
       ")",
     ),
 

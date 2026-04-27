@@ -128,7 +128,5 @@ def 3rdX;
 
 (source_file
   (def_definition
-    (ERROR
-      (integer_literal))
     (identifier)
     (body)))

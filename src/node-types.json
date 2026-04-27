@@ -543,67 +543,7 @@
       "required": true,
       "types": [
         {
-          "type": "anonymous_record",
-          "named": true
-        },
-        {
-          "type": "bang_operator_call",
-          "named": true
-        },
-        {
-          "type": "bits_value",
-          "named": true
-        },
-        {
-          "type": "boolean_literal",
-          "named": true
-        },
-        {
-          "type": "code_literal",
-          "named": true
-        },
-        {
-          "type": "cond_operator_call",
-          "named": true
-        },
-        {
           "type": "dag_arg",
-          "named": true
-        },
-        {
-          "type": "dag_value",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "list_value",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "unset_value",
-          "named": true
-        },
-        {
-          "type": "value_suffix_braces",
-          "named": true
-        },
-        {
-          "type": "value_suffix_brackets",
-          "named": true
-        },
-        {
-          "type": "value_suffix_dot",
           "named": true
         }
       ]
@@ -2238,6 +2178,11 @@
     }
   },
   {
+    "type": "string_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "template_parameter",
     "named": true,
     "fields": {},
@@ -2843,10 +2788,6 @@
   {
     "type": "string",
     "named": false
-  },
-  {
-    "type": "string_literal",
-    "named": true
   },
   {
     "type": "then",
