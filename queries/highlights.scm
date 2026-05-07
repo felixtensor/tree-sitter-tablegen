@@ -43,6 +43,7 @@
 ;; Literals
 (integer_literal)  @number
 (string_literal)   @string
+(escape_sequence)  @string.escape
 (boolean_literal)  @boolean
 (unset_value)      @constant.builtin
 

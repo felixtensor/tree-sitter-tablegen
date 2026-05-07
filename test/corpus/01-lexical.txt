@@ -91,7 +91,93 @@ def X { string s = "a\nb"; }
       (field_declaration
         (type)
         (identifier)
-        (string_literal)))))
+        (string_literal
+          (escape_sequence))))))
+
+==================
+String literal exposes every escape variant
+==================
+
+def X {
+  string a = "plain text";
+  string b = "with\nnewline";
+  string c = "with\tquote";
+  string d = "with\"dquote";
+  string e = "with\\backslash";
+  string f = "with\'apostrophe";
+  string g = "mixed \n and \t and \" pieces";
+  string h = "trailing escape\n";
+}
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence)))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence)))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence)))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence)))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence)))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)))
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence))))))
+
+==================
+Adjacent string atoms still concatenate across lines
+==================
+
+def X {
+  string s = "first part\n"
+             "second\tpart";
+}
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal
+          (escape_sequence)
+          (escape_sequence))))))
 
 ==================
 Boolean and unset literals

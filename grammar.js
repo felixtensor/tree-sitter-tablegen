@@ -91,14 +91,21 @@ export default grammar({
     // wrapped string parses as a single string_literal node.
     string_literal: $ => prec.left(repeat1($._string_atom)),
 
-    _string_atom: _ => token(seq(
+    // Inner content + escape_sequence are immediate tokens so `extras`
+    // (whitespace, comments) cannot leak into the string body. The opening
+    // `"` is a regular token to permit extras BETWEEN concatenated atoms.
+    _string_atom: $ => seq(
       '"',
       repeat(choice(
-        /[^"\\\n]/,
-        /\\["\\tn']/,
+        $._string_content,
+        $.escape_sequence,
       )),
-      '"',
-    )),
+      token.immediate('"'),
+    ),
+
+    _string_content: _ => token.immediate(/[^"\\\n]+/),
+
+    escape_sequence: _ => token.immediate(/\\["\\tn']/),
 
     boolean_literal: _ => choice("true", "false"),
 
