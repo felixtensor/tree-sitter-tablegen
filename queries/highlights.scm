@@ -55,7 +55,7 @@
 (variable_name)         @variable.parameter
 
 ;; Code blocks
-(code_chunk) @embedded
+(code_chunk) @string
 
 ;; Class / def / multiclass names — definition position
 (class_definition (identifier) @type.definition)
