@@ -50,11 +50,9 @@ def D { code c = [{ return $value + $other; }]; }
         (identifier)
         (code_literal
           (code_chunk)
-          (variable_substitution
-            (identifier))
+          (variable_substitution)
           (code_chunk)
-          (variable_substitution
-            (identifier))
+          (variable_substitution)
           (code_chunk))))))
 
 ==================

@@ -15,3 +15,5 @@
 
 ;; References
 (identifier) @local.reference
+(variable_substitution) @local.reference
+(variable_name) @local.reference

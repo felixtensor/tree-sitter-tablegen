@@ -1401,28 +1401,19 @@
       ]
     },
     "variable_substitution": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "$"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_var_name"
-          },
-          "named": true,
-          "value": "identifier"
-        }
-      ]
-    },
-    "_var_name": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "[A-Za-z0-9_]+"
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "$"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[A-Za-z0-9_]+"
+          }
+        ]
       }
     },
     "anonymous_record": {

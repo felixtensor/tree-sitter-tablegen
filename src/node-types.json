@@ -2351,21 +2351,6 @@
     }
   },
   {
-    "type": "variable_substitution",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "!add",
     "named": false
   },
@@ -2618,10 +2603,6 @@
     "named": false
   },
   {
-    "type": "$",
-    "named": false
-  },
-  {
     "type": "(",
     "named": false
   },
@@ -2821,6 +2802,10 @@
   },
   {
     "type": "variable_name",
+    "named": true
+  },
+  {
+    "type": "variable_substitution",
     "named": true
   },
   {

@@ -51,7 +51,7 @@
 (bang_operator) @function.builtin
 "!cond"         @function.builtin
 
-;; Variable substitution inside code blocks
+;; Variable substitution (`$foo` / `$0` inside code_literal; `$bare` in DAG)
 (variable_substitution) @variable.parameter
 (variable_name)         @variable.parameter
 

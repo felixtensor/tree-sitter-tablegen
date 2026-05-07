@@ -344,12 +344,10 @@ export default grammar({
     ),
 
     // Inside code literals, `$N` (positional) and `$name` are both substitutions
-    // (NativeCodeCall and op assembly format use `$0`, `$1`, ...). The name is
-    // any run of identifier chars including a leading digit; we surface it as
-    // `identifier` so existing queries/highlights continue to apply.
-    variable_substitution: $ => seq("$", alias($._var_name, $.identifier)),
-
-    _var_name: _ => token.immediate(/[A-Za-z0-9_]+/),
+    // (NativeCodeCall and op assembly format use `$0`, `$1`, ...).  Emit as a
+    // single token so highlight queries can colour the entire `$name` uniformly,
+    // matching the VS Code TextMate convention `(\$\w+)\b`.
+    variable_substitution: _ => token.immediate(seq("$", /[A-Za-z0-9_]+/)),
 
     anonymous_record: $ => seq(
       $.identifier,

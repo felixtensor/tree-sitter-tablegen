@@ -90,6 +90,5 @@ class C { code body = [{ return $x; }]; }
         (identifier)
         (code_literal
           (code_chunk)
-          (variable_substitution
-            (identifier))
+          (variable_substitution)
           (code_chunk))))))
