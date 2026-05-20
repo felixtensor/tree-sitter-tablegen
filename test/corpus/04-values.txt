@@ -145,6 +145,21 @@ def D {
         (bang_operator_call (bang_operator) (boolean_literal) (integer_literal) (integer_literal))))))
 
 ==================
+Sort bang operator
+==================
+
+def D { list<int> sorted = !sort(x, [3, 1, 2], x); }
+
+---
+
+(source_file
+  (def_definition
+    (identifier)
+    (body
+      (field_declaration (type) (identifier)
+        (bang_operator_call (bang_operator) (identifier) (list_value (integer_literal) (integer_literal) (integer_literal)) (identifier))))))
+
+==================
 Cond operator
 ==================
 
