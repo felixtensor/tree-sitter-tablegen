@@ -66,11 +66,11 @@
 ;; Parent class references
 (parent_class (identifier) @type)
 
-;; Field declarations
-(field_declaration (identifier) @property)
+;; Field declarations — capture only the declared field name, not RHS refs.
+(field_declaration (type) . (identifier) @property)
 
-;; Named arguments
-(named_argument (identifier) @field)
+;; Named arguments — capture only the argument name, not RHS refs.
+(named_argument . (identifier) @field)
 
 ;; Punctuation
 [ "{" "}" "[" "]" "(" ")" "<" ">" ] @punctuation.bracket
@@ -89,5 +89,5 @@
   (#match? @type "Op$|Type$|Attr$"))
 
 ;; Common ODS field names
-(field_declaration (identifier) @property.special
+(field_declaration (type) . (identifier) @property.special
   (#match? @property.special "^(arguments|results|regions|successors|summary|description|hasVerifier|hasCanonicalizer|hasCanonicalizeMethod|assemblyFormat|extraClassDeclaration|builders|hasFolder)$"))
