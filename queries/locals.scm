@@ -7,7 +7,7 @@
 
 ;; Definitions
 (class_definition (identifier) @local.definition)
-(def_definition (identifier) @local.definition)
+(def_definition (object_name (identifier) @local.definition))
 (multiclass_definition (identifier) @local.definition)
 (template_parameter (identifier) @local.definition)
 (defvar_statement (identifier) @local.definition)

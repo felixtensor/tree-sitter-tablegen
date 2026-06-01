@@ -558,75 +558,15 @@
       "required": true,
       "types": [
         {
-          "type": "anonymous_record",
-          "named": true
-        },
-        {
-          "type": "bang_operator_call",
-          "named": true
-        },
-        {
-          "type": "bits_value",
-          "named": true
-        },
-        {
           "type": "body",
           "named": true
         },
         {
-          "type": "boolean_literal",
-          "named": true
-        },
-        {
-          "type": "code_literal",
-          "named": true
-        },
-        {
-          "type": "cond_operator_call",
-          "named": true
-        },
-        {
-          "type": "dag_value",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "list_value",
+          "type": "object_name",
           "named": true
         },
         {
           "type": "parent_class_list",
-          "named": true
-        },
-        {
-          "type": "paste_expression",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "unset_value",
-          "named": true
-        },
-        {
-          "type": "value_suffix_braces",
-          "named": true
-        },
-        {
-          "type": "value_suffix_brackets",
-          "named": true
-        },
-        {
-          "type": "value_suffix_dot",
           "named": true
         }
       ]
@@ -641,71 +581,11 @@
       "required": false,
       "types": [
         {
-          "type": "anonymous_record",
-          "named": true
-        },
-        {
-          "type": "bang_operator_call",
-          "named": true
-        },
-        {
-          "type": "bits_value",
-          "named": true
-        },
-        {
-          "type": "boolean_literal",
-          "named": true
-        },
-        {
-          "type": "code_literal",
-          "named": true
-        },
-        {
-          "type": "cond_operator_call",
-          "named": true
-        },
-        {
-          "type": "dag_value",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "list_value",
+          "type": "object_name",
           "named": true
         },
         {
           "type": "parent_class_list",
-          "named": true
-        },
-        {
-          "type": "paste_expression",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "unset_value",
-          "named": true
-        },
-        {
-          "type": "value_suffix_braces",
-          "named": true
-        },
-        {
-          "type": "value_suffix_brackets",
-          "named": true
-        },
-        {
-          "type": "value_suffix_dot",
           "named": true
         }
       ]
@@ -1800,6 +1680,81 @@
       "types": [
         {
           "type": "named_argument",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_record",
+          "named": true
+        },
+        {
+          "type": "bang_operator_call",
+          "named": true
+        },
+        {
+          "type": "bits_value",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "code_literal",
+          "named": true
+        },
+        {
+          "type": "cond_operator_call",
+          "named": true
+        },
+        {
+          "type": "dag_value",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "list_value",
+          "named": true
+        },
+        {
+          "type": "paste_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unset_value",
+          "named": true
+        },
+        {
+          "type": "value_suffix_braces",
+          "named": true
+        },
+        {
+          "type": "value_suffix_brackets",
+          "named": true
+        },
+        {
+          "type": "value_suffix_dot",
           "named": true
         }
       ]

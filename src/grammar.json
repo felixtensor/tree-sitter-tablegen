@@ -441,7 +441,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_value"
+              "name": "object_name"
             },
             {
               "type": "BLANK"
@@ -478,7 +478,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_value"
+              "name": "object_name"
             },
             {
               "type": "BLANK"
@@ -502,6 +502,10 @@
           "value": ";"
         }
       ]
+    },
+    "object_name": {
+      "type": "SYMBOL",
+      "name": "_value"
     },
     "defset_definition": {
       "type": "SEQ",

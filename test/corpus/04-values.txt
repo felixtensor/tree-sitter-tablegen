@@ -8,10 +8,21 @@ def D { list<int> xs = [1, 2, 3]<int>; list<int> empty = []; }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type) (identifier) (list_value (integer_literal) (integer_literal) (integer_literal) (type)))
-      (field_declaration (type) (identifier) (list_value)))))
+      (field_declaration
+        (type)
+        (identifier)
+        (list_value
+          (integer_literal)
+          (integer_literal)
+          (integer_literal)
+          (type)))
+      (field_declaration
+        (type)
+        (identifier)
+        (list_value)))))
 
 ==================
 Bits literal
@@ -23,9 +34,18 @@ def D { bits<4> b = {1, 0, 1, 0}; }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type (integer_literal)) (identifier) (bits_value (integer_literal) (integer_literal) (integer_literal) (integer_literal))))))
+      (field_declaration
+        (type
+          (integer_literal))
+        (identifier)
+        (bits_value
+          (integer_literal)
+          (integer_literal)
+          (integer_literal)
+          (integer_literal))))))
 
 ==================
 Dag literal
@@ -37,14 +57,22 @@ def D { dag x = (op a, b:$name, $bare); }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type) (identifier)
+      (field_declaration
+        (type)
+        (identifier)
         (dag_value
-          (dag_arg (identifier))
-          (dag_arg (identifier))
-          (dag_arg (identifier) (variable_name))
-          (dag_arg (variable_name)))))))
+          (dag_arg
+            (identifier))
+          (dag_arg
+            (identifier))
+          (dag_arg
+            (identifier)
+            (variable_name))
+          (dag_arg
+            (variable_name)))))))
 
 ==================
 Value suffix range_list bit access and slice
@@ -56,14 +84,59 @@ def D { int a = X{0}; int b = X{0...3}; int c = X{0,2,4}; int d = X[0]; int e = 
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type) (identifier) (identifier) (value_suffix_braces (range_list (range_piece (integer_literal)))))
-      (field_declaration (type) (identifier) (identifier) (value_suffix_braces (range_list (range_piece (integer_literal) (integer_literal)))))
-      (field_declaration (type) (identifier) (identifier) (value_suffix_braces (range_list (range_piece (integer_literal)) (range_piece (integer_literal)) (range_piece (integer_literal)))))
-      (field_declaration (type) (identifier) (identifier) (value_suffix_brackets (slice_element (integer_literal))))
-      (field_declaration (type) (identifier) (identifier) (value_suffix_brackets (slice_element (integer_literal) (integer_literal))))
-      (field_declaration (type) (identifier) (identifier) (value_suffix_dot (identifier))))))
+      (field_declaration
+        (type)
+        (identifier)
+        (identifier)
+        (value_suffix_braces
+          (range_list
+            (range_piece
+              (integer_literal)))))
+      (field_declaration
+        (type)
+        (identifier)
+        (identifier)
+        (value_suffix_braces
+          (range_list
+            (range_piece
+              (integer_literal)
+              (integer_literal)))))
+      (field_declaration
+        (type)
+        (identifier)
+        (identifier)
+        (value_suffix_braces
+          (range_list
+            (range_piece
+              (integer_literal))
+            (range_piece
+              (integer_literal))
+            (range_piece
+              (integer_literal)))))
+      (field_declaration
+        (type)
+        (identifier)
+        (identifier)
+        (value_suffix_brackets
+          (slice_element
+            (integer_literal))))
+      (field_declaration
+        (type)
+        (identifier)
+        (identifier)
+        (value_suffix_brackets
+          (slice_element
+            (integer_literal)
+            (integer_literal))))
+      (field_declaration
+        (type)
+        (identifier)
+        (identifier)
+        (value_suffix_dot
+          (identifier))))))
 
 ==================
 Paste expression with trailing
@@ -75,12 +148,16 @@ def D { string s = "a" # b # ; }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type) (identifier)
+      (field_declaration
+        (type)
+        (identifier)
         (paste_expression
-          (paste_expression (string_literal) (identifier))
-          )))))
+          (paste_expression
+            (string_literal)
+            (identifier)))))))
 
 ==================
 Anonymous record as value
@@ -92,11 +169,19 @@ def D { Foo x = MyClass<1, "y">; }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type (identifier)) (identifier)
-        (anonymous_record (identifier)
-          (argument_list (positional_arguments (integer_literal) (string_literal))))))))
+      (field_declaration
+        (type
+          (identifier))
+        (identifier)
+        (anonymous_record
+          (identifier)
+          (argument_list
+            (positional_arguments
+              (integer_literal)
+              (string_literal))))))))
 
 ==================
 Named arguments after positional
@@ -108,14 +193,22 @@ def D : C<1, 2, name=3, other="x">;
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (parent_class_list
-      (parent_class (identifier)
+      (parent_class
+        (identifier)
         (argument_list
-          (positional_arguments (integer_literal) (integer_literal))
+          (positional_arguments
+            (integer_literal)
+            (integer_literal))
           (named_arguments
-            (named_argument (identifier) (integer_literal))
-            (named_argument (identifier) (string_literal))))))
+            (named_argument
+              (identifier)
+              (integer_literal))
+            (named_argument
+              (identifier)
+              (string_literal))))))
     (body)))
 
 ==================
@@ -133,16 +226,40 @@ def D {
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type) (identifier)
-        (bang_operator_call (bang_operator) (integer_literal) (integer_literal)))
-      (field_declaration (type) (identifier)
-        (bang_operator_call (bang_operator) (type) (identifier)))
-      (field_declaration (type) (identifier)
-        (bang_operator_call (bang_operator) (list_value (integer_literal)) (list_value (integer_literal))))
-      (field_declaration (type) (identifier)
-        (bang_operator_call (bang_operator) (boolean_literal) (integer_literal) (integer_literal))))))
+      (field_declaration
+        (type)
+        (identifier)
+        (bang_operator_call
+          (bang_operator)
+          (integer_literal)
+          (integer_literal)))
+      (field_declaration
+        (type)
+        (identifier)
+        (bang_operator_call
+          (bang_operator)
+          (type)
+          (identifier)))
+      (field_declaration
+        (type)
+        (identifier)
+        (bang_operator_call
+          (bang_operator)
+          (list_value
+            (integer_literal))
+          (list_value
+            (integer_literal))))
+      (field_declaration
+        (type)
+        (identifier)
+        (bang_operator_call
+          (bang_operator)
+          (boolean_literal)
+          (integer_literal)
+          (integer_literal))))))
 
 ==================
 Cond operator
@@ -154,10 +271,19 @@ def D { int x = !cond(a: 1, b: 2, true: 0); }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
-      (field_declaration (type) (identifier)
+      (field_declaration
+        (type)
+        (identifier)
         (cond_operator_call
-          (cond_clause (identifier) (integer_literal))
-          (cond_clause (identifier) (integer_literal))
-          (cond_clause (boolean_literal) (integer_literal)))))))
+          (cond_clause
+            (identifier)
+            (integer_literal))
+          (cond_clause
+            (identifier)
+            (integer_literal))
+          (cond_clause
+            (boolean_literal)
+            (integer_literal)))))))
