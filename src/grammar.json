@@ -2289,6 +2289,10 @@
         },
         {
           "type": "STRING",
+          "value": "!sort"
+        },
+        {
+          "type": "STRING",
           "value": "!sra"
         },
         {

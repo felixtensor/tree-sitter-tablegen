@@ -472,7 +472,7 @@ export default grammar({
       "!gt", "!head", "!if", "!initialized", "!instances", "!interleave", "!isa", "!le",
       "!listconcat", "!listflatten", "!listremove", "!listsplat", "!logtwo", "!lt", "!match",
       "!mul", "!ne", "!not", "!or", "!range", "!repr", "!setdagarg", "!setdagname",
-      "!setdagop", "!setdagopname", "!shl", "!size", "!sra", "!srl", "!strconcat", "!sub",
+      "!setdagop", "!setdagopname", "!shl", "!size", "!sort", "!sra", "!srl", "!strconcat", "!sub",
       "!subst", "!substr", "!tail", "!tolower", "!toupper", "!xor",
     ),
 

@@ -2490,6 +2490,10 @@
     "named": false
   },
   {
+    "type": "!sort",
+    "named": false
+  },
+  {
     "type": "!sra",
     "named": false
   },
