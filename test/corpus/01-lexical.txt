@@ -10,7 +10,8 @@ def X;
 (source_file
   (line_comment)
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body)))
 
 ==================
@@ -25,7 +26,8 @@ def X;
 (source_file
   (block_comment)
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body)))
 
 ==================
@@ -40,7 +42,8 @@ def X;
 (source_file
   (block_comment)
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body)))
 
 ==================
@@ -53,7 +56,8 @@ def X { int a = 42; int b = 0xFF; int c = 0b1010; int d = -7; int e = +3; }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
       (field_declaration
         (type)
@@ -86,7 +90,8 @@ def X { string s = "a\nb"; }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
       (field_declaration
         (type)
@@ -113,7 +118,8 @@ def X {
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
       (field_declaration
         (type)
@@ -170,7 +176,8 @@ def X {
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
       (field_declaration
         (type)
@@ -189,7 +196,8 @@ def X { bit a = true; bit b = false; bit c = ?; }
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body
       (field_declaration
         (type)
@@ -214,5 +222,6 @@ def 3rdX;
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (body)))

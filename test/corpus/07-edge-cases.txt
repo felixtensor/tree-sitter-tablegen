@@ -92,3 +92,98 @@ class C { code body = [{ return $x; }]; }
           (code_chunk)
           (variable_substitution)
           (code_chunk))))))
+
+==================
+Object names preserve expression boundaries
+==================
+
+def Bare;
+def Prefix#Suffix;
+def !strconcat("Bang", "Name");
+def "Literal";
+def "";
+
+class Meta {
+  string Name = "SuffixName";
+}
+
+def Holder : Meta;
+
+multiclass Expansion<Meta Value> {
+  def Value.Name;
+  def [{CodeName}];
+}
+
+defm Prefix#Suffix : Expansion<Holder>;
+
+---
+
+(source_file
+  (def_definition
+    (object_name
+      (identifier))
+    (body))
+  (def_definition
+    (object_name
+      (paste_expression
+        (identifier)
+        (identifier)))
+    (body))
+  (def_definition
+    (object_name
+      (bang_operator_call
+        (bang_operator)
+        (string_literal)
+        (string_literal)))
+    (body))
+  (def_definition
+    (object_name
+      (string_literal))
+    (body))
+  (def_definition
+    (object_name
+      (string_literal))
+    (body))
+  (class_definition
+    (identifier)
+    (body
+      (field_declaration
+        (type)
+        (identifier)
+        (string_literal))))
+  (def_definition
+    (object_name
+      (identifier))
+    (parent_class_list
+      (parent_class
+        (identifier)))
+    (body))
+  (multiclass_definition
+    (identifier)
+    (template_parameters
+      (template_parameter
+        (type
+          (identifier))
+        (identifier)))
+    (def_definition
+      (object_name
+        (identifier)
+        (value_suffix_dot
+          (identifier)))
+      (body))
+    (def_definition
+      (object_name
+        (code_literal
+          (code_chunk)))
+      (body)))
+  (defm_definition
+    (object_name
+      (paste_expression
+        (identifier)
+        (identifier)))
+    (parent_class_list
+      (parent_class
+        (identifier)
+        (argument_list
+          (positional_arguments
+            (identifier)))))))

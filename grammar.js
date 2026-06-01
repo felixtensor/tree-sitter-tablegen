@@ -135,17 +135,19 @@ export default grammar({
 
     def_definition: $ => seq(
       "def",
-      optional($._value),                    // _value declared below; temporary stub
+      optional($.object_name),
       optional($.parent_class_list),
       $.body,
     ),
 
     defm_definition: $ => seq(
       "defm",
-      optional($._value),
+      optional($.object_name),
       optional($.parent_class_list),
       ";",
     ),
+
+    object_name: $ => $._value,
 
     defset_definition: $ => seq(
       "defset",

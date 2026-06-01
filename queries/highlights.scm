@@ -60,7 +60,7 @@
 
 ;; Class / def / multiclass names — definition position
 (class_definition (identifier) @type.definition)
-(def_definition (identifier) @constant)
+(def_definition (object_name (identifier) @constant))
 (multiclass_definition (identifier) @function.macro)
 
 ;; Parent class references
@@ -85,7 +85,7 @@
   (#match? @type.builtin "^(Op|Pattern|Pat|Intrinsic|Attr|AttrDef|TypeDef|Dialect|Interface|OpInterface|AttrInterface|TypeInterface|Constraint|Pred|Property)$"))
 
 ;; ODS def names that follow the "Op" / "Type" / "Attr" suffix convention
-(def_definition (identifier) @type
+(def_definition (object_name (identifier) @type)
   (#match? @type "Op$|Type$|Attr$"))
 
 ;; Common ODS field names

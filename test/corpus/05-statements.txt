@@ -8,7 +8,8 @@ defm Name : Foo<1>, Bar;
 
 (source_file
   (defm_definition
-    (identifier)
+    (object_name
+      (identifier))
     (parent_class_list
       (parent_class
         (identifier)
@@ -46,10 +47,12 @@ defset list<C> Group = { def A; def B; }
       (identifier))
     (identifier)
     (def_definition
-      (identifier)
+      (object_name
+        (identifier))
       (body))
     (def_definition
-      (identifier)
+      (object_name
+        (identifier))
       (body))))
 
 ==================
@@ -84,10 +87,25 @@ foreach j = [1, 2, 3] in def Y;
 ---
 
 (source_file
-  (foreach_statement (identifier) (range_piece (integer_literal) (integer_literal))
-    (def_definition (identifier) (body)))
-  (foreach_statement (identifier) (list_value (integer_literal) (integer_literal) (integer_literal))
-    (def_definition (identifier) (body))))
+  (foreach_statement
+    (identifier)
+    (range_piece
+      (integer_literal)
+      (integer_literal))
+    (def_definition
+      (object_name
+        (identifier))
+      (body)))
+  (foreach_statement
+    (identifier)
+    (list_value
+      (integer_literal)
+      (integer_literal)
+      (integer_literal))
+    (def_definition
+      (object_name
+        (identifier))
+      (body))))
 
 ==================
 If then else
@@ -102,9 +120,16 @@ if true then {
 ---
 
 (source_file
-  (if_statement (boolean_literal)
-    (def_definition (identifier) (body))
-    (def_definition (identifier) (body))))
+  (if_statement
+    (boolean_literal)
+    (def_definition
+      (object_name
+        (identifier))
+      (body))
+    (def_definition
+      (object_name
+        (identifier))
+      (body))))
 
 ==================
 Let in block
@@ -118,9 +143,17 @@ let x = 1, append y = 2 in {
 
 (source_file
   (let_statement
-    (let_item (identifier) (integer_literal))
-    (let_item (let_mode) (identifier) (integer_literal))
-    (def_definition (identifier) (body))))
+    (let_item
+      (identifier)
+      (integer_literal))
+    (let_item
+      (let_mode)
+      (identifier)
+      (integer_literal))
+    (def_definition
+      (object_name
+        (identifier))
+      (body))))
 
 ==================
 Multiclass with body
@@ -135,8 +168,22 @@ multiclass MC<int N> {
 ---
 
 (source_file
-  (multiclass_definition (identifier)
-    (template_parameters (template_parameter (type) (identifier)))
-    (def_definition (identifier) (body))
-    (defm_definition (identifier) (parent_class_list (parent_class (identifier))))
-    (defvar_statement (identifier) (identifier))))
+  (multiclass_definition
+    (identifier)
+    (template_parameters
+      (template_parameter
+        (type)
+        (identifier)))
+    (def_definition
+      (object_name
+        (identifier))
+      (body))
+    (defm_definition
+      (object_name
+        (identifier))
+      (parent_class_list
+        (parent_class
+          (identifier))))
+    (defvar_statement
+      (identifier)
+      (identifier))))

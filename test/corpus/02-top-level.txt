@@ -105,7 +105,8 @@ def D : Parent { let foo = 1; let append bar = 2; defvar v = 3; assert v, "msg";
 
 (source_file
   (def_definition
-    (identifier)
+    (object_name
+      (identifier))
     (parent_class_list
       (parent_class
         (identifier)))
