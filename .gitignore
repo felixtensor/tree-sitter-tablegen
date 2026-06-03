@@ -6,7 +6,6 @@ Cargo.lock
 build/
 prebuilds/
 node_modules/
-package-lock.json
 
 # Swift artifacts
 .build/
@@ -34,6 +33,7 @@ dist/
 # Zig artifacts
 .zig-cache/
 zig-cache/
+zig-pkg/
 zig-out/
 
 # Grammar volatiles

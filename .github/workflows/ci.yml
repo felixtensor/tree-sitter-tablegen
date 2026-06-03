@@ -23,8 +23,11 @@ concurrency:
   group: ${{github.workflow}}-${{github.ref}}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 env:
-  # GitHub hosted runners force JavaScript actions to Node 24 from 2026-06-02.
+  # GitHub hosted runners force JavaScript actions to Node 24 from 2026-06-16.
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
@@ -57,5 +60,14 @@ jobs:
       # Parse examples without ERROR nodes as a required integration corpus.
       - name: Parse examples
         uses: tree-sitter/parse-action@v4
+        id: parse-files
         with:
           files: examples/**/*.td
+
+      - name: Upload parse failures
+        if: ${{ failure() && steps.parse-files.outputs.failures != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: parse-failures-${{matrix.os}}
+          path: ${{steps.parse-files.outputs.failures}}
+          retention-days: 7
