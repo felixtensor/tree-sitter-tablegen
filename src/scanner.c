@@ -17,23 +17,22 @@ static inline bool is_ident_start(int32_t c) {
   return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_';
 }
 
-void *tree_sitter_tablegen_external_scanner_create(void) {
-  return NULL;
-}
+void *tree_sitter_tablegen_external_scanner_create(void) { return NULL; }
 
 void tree_sitter_tablegen_external_scanner_destroy(void *payload) {
   (void)payload;
 }
 
-unsigned tree_sitter_tablegen_external_scanner_serialize(
-    void *payload, char *buffer) {
+unsigned tree_sitter_tablegen_external_scanner_serialize(void *payload,
+                                                         char *buffer) {
   (void)payload;
   (void)buffer;
   return 0;
 }
 
-void tree_sitter_tablegen_external_scanner_deserialize(
-    void *payload, const char *buffer, unsigned length) {
+void tree_sitter_tablegen_external_scanner_deserialize(void *payload,
+                                                       const char *buffer,
+                                                       unsigned length) {
   (void)payload;
   (void)buffer;
   (void)length;
@@ -41,8 +40,8 @@ void tree_sitter_tablegen_external_scanner_deserialize(
 
 static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
-bool tree_sitter_tablegen_external_scanner_scan(
-    void *payload, TSLexer *lexer, const bool *valid_symbols) {
+bool tree_sitter_tablegen_external_scanner_scan(void *payload, TSLexer *lexer,
+                                                const bool *valid_symbols) {
   (void)payload;
 
   // Leading-digit identifier: `[0-9]+[A-Za-z_][A-Za-z0-9_]*`.
@@ -99,10 +98,8 @@ bool tree_sitter_tablegen_external_scanner_scan(
       lexer->mark_end(lexer);
       advance(lexer);
       int32_t after = lexer->lookahead;
-      if ((after >= 'A' && after <= 'Z') ||
-          (after >= 'a' && after <= 'z') ||
-          (after >= '0' && after <= '9') ||
-          after == '_') {
+      if ((after >= 'A' && after <= 'Z') || (after >= 'a' && after <= 'z') ||
+          (after >= '0' && after <= '9') || after == '_') {
         // Real substitution boundary — emit chunk so far.
         if (consumed_any) {
           lexer->result_symbol = CODE_CHUNK;
